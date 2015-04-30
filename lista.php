@@ -15,7 +15,7 @@ $list = $xml->getElementById('playlist-autoscroll-list');
 
 $items = $list->childNodes;
 
-for ($i = 159; $i < $items->length; ++$i) {
+for ($i = 1; $i < $items->length; ++$i) {
     $item = $items->item($i);
     /* Se é um elemento e tem o data video id */
     if(($item instanceof \DOMElement) && ($item->hasAttribute ('data-video-id'))){

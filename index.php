@@ -16,6 +16,9 @@
 				<th>
 					Estado
 				</th>
+				<th>
+					Tempo
+				</th>
 			</tr>
 		</thead>
 		<tbody>

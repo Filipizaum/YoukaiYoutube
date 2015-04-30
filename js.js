@@ -18,12 +18,23 @@ window.onload = function(){
 					console.log('baixando vídeo '+lista[current][0]);
 					var row = $('#td_'+current);
 					var status = $(row.find('td').get(1));
+                                        var tempo = $(row.find('td').get(2));
 					status.html('DL').css('color', 'blue');
-
+                                        lista[current]['startTime'] = Date.now();
 					
+                                        (function(current, tempo){
+                                            t = setInterval(function(){
+                                                var interval = (Date.now())-lista[current]['startTime']+'';
+                                                var inputHTML = '<span style="font-weight:bold;">'+interval.substr(0,interval.length-3)+'</span>'+interval.substr(interval.length-3,interval.length);
+                                                tempo.html(inputHTML);
+                                            },10);
+                                            
+                                        })(current, tempo);
+                                        
 
 					$.ajax('baixa.php', {method:'post', data:{'url':lista[current][0]}})
 					.done(function(resposta){
+                                            clearInterval(t);
 						status.html('OK').css('color', 'green');
 						lista[current][0]
 						if(resposta==1){
@@ -49,8 +60,10 @@ window.onload = function(){
 			tbody.append(tr);
 			var td = $('<td>').html(lista[prop][0]);
 			var	td2 = $('<td>').html(lista[prop][1]).css('color', 'red');
+                        var	td3 = $('<td>');
 			tr.append(td);
 			tr.append(td2);
+                        tr.append(td3);
 		}
 	}
 
