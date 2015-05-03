@@ -1,6 +1,10 @@
 <?php
 
-define('_Q', '<br>\n');
+function toYoutubeUrl($vid){
+    return 'https://www.youtube.com/watch?v='.$vid;
+}
+
+include 'listaProntos.php';
 
 // Create a new DOM Document to hold our webpage structure
 $xml = new DOMDocument();
@@ -15,15 +19,26 @@ $list = $xml->getElementById('playlist-autoscroll-list');
 
 $items = $list->childNodes;
 
-for ($i = 1; $i < $items->length; ++$i) {
+/* Pega os que já foram baixados, salvos em um arquivo de texto */
+$listaProntos = pegaListaProntos();
+
+for ($i = 0; $i < $items->length; ++$i) {
     $item = $items->item($i);
     /* Se é um elemento e tem o data video id */
     if(($item instanceof \DOMElement) && ($item->hasAttribute ('data-video-id'))){
-    	$arr = array(
-    		0 => 'https://www.youtube.com/watch?v='.$item->getAttribute('data-video-id'), 
-    		1 => 'NY'
-    		);
-    	$urls[] = $arr;
+        $vid = $item->getAttribute('data-video-id');
+        /* Correção do episódio 15 temporada 2 */
+        if($vid == 'uKa3BUG2mk0'){
+            $vid = 'wfyI0M_cdlA';
+        }
+        /* Se o vídeo não foi baixado */
+        if (!in_array(toYoutubeUrl($vid).PHP_EOL, $listaProntos)) {
+            $arr = array(
+                    0 => toYoutubeUrl($vid), 
+                    1 => 'NY'
+                    );
+            $urls[] = $arr;
+        }
     }
     
 }
