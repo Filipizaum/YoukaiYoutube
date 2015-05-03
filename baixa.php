@@ -2,18 +2,40 @@
 
 include 'listaProntos.php';
 
-$resposta = shell_exec('youtube-dl --format=18 '.$_POST['url'].' && echo "\nVALEU"');
+$resposta = shell_exec('youtube-dl --format=18 ' . $_POST['url'] . ' && echo "\nVALEU"');
 
 $ex = explode(PHP_EOL, $resposta);
 
-$last = $ex[count($ex)-2];
+$last = $ex[count($ex)-2]; 
 
-/* Se o Valeu foi encontrado*/
+/* Remove os dois últimos elementos do array */
+$pureEx = $ex;
+array_pop($pureEx); // remove a última linha (em branco)
+array_pop($pureEx); // remove a mensagem VALEU
+
+$im = implode('', $pureEx); // junta os pedaços em uma String
+
+/* Se o VALEU foi encontrado*/
 if(strpos('VALEU', $last) !== false){
     adicionaListaProntos($_POST['url']);
-    echo 1;
+    /* Retorna um json com o log */
+    echo json_encode(
+            array(
+                'code' => 1,
+                'log' => $im
+            )
+    );
 }else{
-    echo 0;
+    /* Retorna um json com o log */
+    echo json_encode(
+            array(
+                'code' => 0,
+                'log' => $im
+            )
+    );
 }
+
+
+
 
 

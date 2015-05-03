@@ -1,0 +1,24 @@
+#logPopup{
+    position: fixed;
+    right: 90px;
+    top: 20px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 9px;
+    background-color: lightgreen;
+}
+
+#logPopup .panel-head{
+    width: 100%;
+    display: inline-block;
+    background-color: #3a3;
+    padding: 3px;
+}
+
+#logPopup .close-button{
+    border: 1px solid black;
+    float: right;
+    background-color: #a33;
+    color: white;
+    cursor: pointer;
+}

@@ -10,7 +10,7 @@ include 'listaProntos.php';
 $xml = new DOMDocument();
 
 // Load the url's contents into the DOM
-$xml->loadHTMLFile('https://www.youtube.com/watch?v=Ate-X-RxkxU&list=PLF7BA6CCFB215C13B');
+@$xml->loadHTMLFile('https://www.youtube.com/watch?v=Ate-X-RxkxU&list=PLF7BA6CCFB215C13B');
 
 // Empty array to hold all links to return
 $urls = array();
@@ -48,26 +48,3 @@ $range = range(1, count($urls));
 $urls = array_combine($range, $urls);
 
 echo json_encode($urls, false);
-
-
-
-/*
-$myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
-$content = fread($myfile,filesize("webdictionary.txt"));
-
-$content = explode(PHP_EOL, $content);
-
-array_pop($content);
-
-$range = range(1, count($content));
-
-$new = array_combine($range, $content);
-
-foreach ($new as $key => $value) {
-	$new[$key] = explode(':::', $new[$key]);
-}
-
-echo json_encode($new, false);
-
-fclose($myfile);
-*/
