@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Baixar Inu Yasha</title>
+        <title>Baixar Listas do Youtube</title>
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="js.js"></script>
         <link rel="stylesheet" type="text/css" href="css.css">
