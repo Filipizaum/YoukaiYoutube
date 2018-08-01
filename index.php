@@ -1,9 +1,23 @@
+<?php
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Baixar Listas do Youtube</title>
         <script type="text/javascript" src="jquery.min.js"></script>
-        <script type="text/javascript" src="js.js"></script>
+        <script type="text/javascript" src="js.js?reload=<?= generateRandomString() ?>"></script>
         <link rel="stylesheet" type="text/css" href="css.css">
         <meta charset="utf-8">
     </head>
